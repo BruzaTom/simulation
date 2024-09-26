@@ -11,7 +11,7 @@ pygame.init()
 pygame.mixer.init()
 
 # Load the music file
-pygame.mixer.music.load('dreamspace.mp3')
+pygame.mixer.music.load('pop.mp3')
 
 # Set the volume (optional)
 pygame.mixer.music.set_volume(0.5)
@@ -29,7 +29,7 @@ def main():
     borderGroup = pygame.sprite.Group()
     ballGroup = pygame.sprite.Group()
 
-    Border.containers = (borderGroup, drawableGroup)
+    Border.containers = (borderGroup, drawableGroup, updatableGroup)
     Ball.containers = (ballGroup, drawableGroup, updatableGroup)
 
 
@@ -40,12 +40,6 @@ def main():
     music_timer = 0
     balls = 1
     while(True):
-        
-        if music_timer > 0:
-            music_pos += dt
-            music_timer -= dt
-        else:
-            pygame.mixer.music.stop()
         screen.fill('Black')        
         for item in updatableGroup:
             item.update(dt)
@@ -54,18 +48,18 @@ def main():
         for item in borderGroup:
             for ball in ballGroup:
                 if ball.collisions(item):
-                    music_timer = .18
+                    pygame.mixer.music.stop()
+                    item.size_timer = .05
                     ball.bounce(balls)
                     balls += 1
-                    if not pygame.mixer.music.get_busy():
-                        pygame.mixer.music.play(start=music_pos)
+                    pygame.mixer.music.play(start=0.17)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return
             
         dt = clock.tick(60) / 1000
-        #print(dt)
+        print(dt)
         pygame.display.flip()#dont ever forget
 
 main()
