@@ -44,5 +44,5 @@ class Ball(CircleShape):
         ball.velocity = - ball.velocity.rotate(newAngle)
 
     def pop_effect(self):
-        pygame.mixer.music.stop()
-        pygame.mixer.music.play(start=0.15)
+        #pygame.mixer.music.stop()
+        pygame.mixer.music.play(start=0.12)
