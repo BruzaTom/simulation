@@ -6,16 +6,19 @@ import random
 class Border(CircleShape):
     def __init__(self, x, y, radius = BORDER_RADIUS, containers = ()):
         super().__init__(x, y, radius)
-        self.size = 2
-        self.size_timer = 0
+        self.width = 2
+        self.timer = 0
         self.bordercolor = 'white'
 
     def update(self, dt):
-        self.size_timer -=dt
+        self.timer -=dt
 
     def draw(self, screen):
-        if self.size_timer > 0: 
-            pygame.draw.circle(screen, self.bordercolor, self.position, self.radius, width=self.size)
+        if self.timer > 0: 
+            pygame.draw.circle(screen, self.bordercolor, self.position, self.radius, width=self.width)
+
+    def effect(self):
+        self.bordercolor = COLORS[random.randint(0,9)]
         
             
         

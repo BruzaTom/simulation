@@ -9,13 +9,6 @@ screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
 # Initialize Pygame and the mixer
 pygame.init()
-pygame.mixer.init()
-
-# Load the music file
-pygame.mixer.music.load('myheadisempty.mp3')
-
-# Set the volume (optional)
-pygame.mixer.music.set_volume(0.5)
 
 def main():
     pygame.init()
@@ -37,16 +30,10 @@ def main():
     border = Border(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
     ball = Ball(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
     
-    music_pos = 18
+    music_pos = 1
     music_timer = 0
     balls = 1
     while(True):
-
-        if music_timer > 0:
-            music_pos += dt
-            music_timer -= dt
-        else:
-            pygame.mixer.music.stop()
         screen.fill('Black')        
         for item in updatableGroup:
             item.update(dt)
@@ -56,13 +43,12 @@ def main():
             for ball in ballGroup:
                 if ball.collisions(item):
                     music_timer = .15
-                    item.size_timer = .5
-                    item.bordercolor = COLORS[random.randint(0,9)]
-
+                    item.timer = .5
+                    
+                    item.effect()
                     ball.bounce(balls)
                     balls += 1
-                    if not pygame.mixer.music.get_busy():
-                        pygame.mixer.music.play(start=music_pos)
+                    
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
