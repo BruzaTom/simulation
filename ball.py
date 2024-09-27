@@ -29,6 +29,12 @@ class Ball(CircleShape):
             ball.velocity = velo1
             ball2 = Ball(self.position.x,self.position.y)
             ball2.velocity = velo2
+
+            velo3 = direction_to_center.rotate(newAngle2) * self.velocity.length()
+            ball3 = Ball(self.position.x,self.position.y)
+            ball3.velocity = velo3
+
+        self.color = COLORS[random.randint(0,9)]
         self.position -= self.velocity.normalize() * .5
         self.velocity = -self.velocity
 

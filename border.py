@@ -15,8 +15,7 @@ class Border(CircleShape):
 
     def draw(self, screen):
         if self.size_timer > 0: 
-            #self.size = 5
-            self.bordercolor = COLORS[random.randint(0,9)]
-        else:
-            self.size = 2
-        pygame.draw.circle(screen, self.bordercolor, self.position, self.radius, width=self.size)
+            pygame.draw.circle(screen, self.bordercolor, self.position, self.radius, width=self.size)
+        
+            
+        

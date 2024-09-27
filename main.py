@@ -3,6 +3,7 @@ from constants import *
 from circleshape import CircleShape
 from border import Border
 from ball import Ball
+import random
 
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
@@ -55,7 +56,8 @@ def main():
             for ball in ballGroup:
                 if ball.collisions(item):
                     music_timer = .15
-                    item.size_timer = .05
+                    item.size_timer = .5
+                    item.bordercolor = COLORS[random.randint(0,9)]
 
                     ball.bounce(balls)
                     balls += 1
