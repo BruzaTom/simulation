@@ -14,7 +14,7 @@ class Border(CircleShape):
         self.timer -=dt
 
     def draw(self, screen):
-        if self.timer > 0: 
+        if self.timer > 0:
             pygame.draw.circle(screen, self.bordercolor, self.position, self.radius, width=self.width)
 
     def effect(self):
