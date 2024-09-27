@@ -10,7 +10,7 @@ class Ball(CircleShape):
         self.color = COLORS[random.randint(0,9)]
 
     def draw(self, screen):
-        pygame.draw.circle(screen, self.color, self.position, self.radius, width=2)
+        pygame.draw.circle(screen, self.color, self.position, self.radius, width=25)
 
     def update(self, dt):
         self.velocity.y += GRAVITY
