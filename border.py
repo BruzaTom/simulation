@@ -18,7 +18,7 @@ class Border(CircleShape):
             pygame.draw.circle(screen, self.bordercolor, self.position, self.radius, width=self.width)
 
     def effect(self):
-        self.bordercolor = COLORS[random.randint(0,9)]
-        
+        #self.bordercolor = COLORS[random.randint(0,len(COLORS)-1)]
+        self.bordercolor = COLORS[6]
             
         

@@ -6,11 +6,10 @@ BORDER_RADIUS = 400
 BALL_RADIUS = 8
 BALL_SPEED = 200
 
-MAX_BALLS = 100
-NEW_BALLS = 2
+MAX_BALLS = 300
+NEW_BALLS = 3
 
 GRAVITY = 1
-BOUNCE = 2
 
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
@@ -30,11 +29,11 @@ COLORS = [
     WHITE,
     RED,
     GREEN,
-    BLUE,
+    #BLUE,
     YELLOW,
     CYAN,
     MAGENTA,
     ORANGE,
-    PURPLE,
+    #PURPLE,
     PINK
     ]
