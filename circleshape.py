@@ -27,10 +27,6 @@ class CircleShape(pygame.sprite.Sprite):
         dx = self.position.x - CENTER[0]
         dy = self.position.y - CENTER[1]
         distance = math.sqrt(dx**2 + dy**2)
-
-        dx = CircleShape.position.x - CENTER[0]
-        dy = CircleShape.position.y - CENTER[1]
-        distance2 = math.sqrt(dx**2 + dy**2)
-        if (distance + self.radius >= BORDER_RADIUS) | (distance + self.radius == distance2 + CircleShape.radius):
+        if distance + self.radius >= BORDER_RADIUS:
             return True
         return False

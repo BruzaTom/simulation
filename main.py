@@ -10,7 +10,7 @@ screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 # Initialize Pygame and the mixer
 pygame.init()
 pygame.mixer.init()
-pygame.mixer.music.load('7weeks3days.mp3')
+pygame.mixer.music.load('7weeks3days_tiktok.mp3')
 pygame.mixer.music.set_volume(0.5)
 
 def main():
@@ -53,7 +53,6 @@ def main():
                 if ball.collisions(item):
                     music_timer = dt * 10
                     item.timer = .5
-                    
                     item.effect()
                     ball.bounce(balls)
                     balls += 1
