@@ -51,7 +51,7 @@ class Ball(CircleShape):
 
     def keep_bouncing(self):
         self.safty()
-        self.color = COLORS[random.randint(0,len(COLORS)-1)]
+        #self.color = COLORS[random.randint(0,len(COLORS)-1)]
         direction_to_center = (CENTER - self.position).normalize()
         newAngle = random.uniform(-25, 10)
         velo = direction_to_center.rotate(newAngle) * self.velocity.length()
@@ -68,7 +68,8 @@ class Ball(CircleShape):
         newAngle = random.uniform(-25, 10)
         velo = direction_to_center.rotate(newAngle) * self.velocity.length()
         self.safty()#protects from sticking
-        ball = Ball(self.position.x,self.position.y, radius=random.randint(3,12))
+        ball = Ball(self.position.x,self.position.y, radius=random.randint(8,20))
+        ball.timer = 0.5
         ball.color = COLORS[random.randint(0,len(COLORS)-1)]
         ball.velocity = velo
 

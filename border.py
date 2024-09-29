@@ -12,7 +12,7 @@ class Border(CircleShape):
         self.grow_radius = radius
 
     def update(self, dt):
-        self.timer -=dt
+        self.timer -= dt
         if self.timer > 0:
             if self.radius <= MAX_RADIUS:
                 self.radius += .5

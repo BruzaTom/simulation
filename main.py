@@ -10,7 +10,7 @@ screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 # Initialize Pygame and the mixer
 pygame.init()
 pygame.mixer.init()
-pygame.mixer.music.load('likethat.mp3')
+pygame.mixer.music.load('missyou.mp3')
 pygame.mixer.music.set_volume(0.5)
 
 def main():
@@ -34,13 +34,14 @@ def main():
     ball = Ball(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
     
     i = 0
-    music_pos = 2.15
+    music_pos = 28.5
     music_timer = 0
     balls = 1
     while(True):
 
         if music_timer > 0:
             music_pos += dt
+            #print(music_pos)
             music_timer -= dt
         else:
             pygame.mixer.music.stop()
@@ -52,7 +53,7 @@ def main():
         for item in borderGroup:
             for ball in ballGroup:
                 if ball.collisions(item):
-                    ball.timer = dt * 15
+                    ball.timer = 0.5
                     music_timer = dt * 15
                     item.timer = dt * 5
                     item.effect()
