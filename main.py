@@ -10,7 +10,7 @@ screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 # Initialize Pygame and the mixer
 pygame.init()
 pygame.mixer.init()
-pygame.mixer.music.load('missyou.mp3')
+pygame.mixer.music.load('sounds/brickbybrick.mp3')
 pygame.mixer.music.set_volume(0.5)
 
 def main():
@@ -41,7 +41,7 @@ def main():
 
         if music_timer > 0:
             music_pos += dt
-            #print(music_pos)
+            #print(music_pos-28.5)
             music_timer -= dt
         else:
             pygame.mixer.music.stop()

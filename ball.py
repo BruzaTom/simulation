@@ -29,7 +29,7 @@ class Ball(CircleShape):
         self.position += self.velocity * dt
 
     def bounce(self, balls):
-        self.pop_effect()
+        #self.pop_effect()
         if MAX_BALLS > balls:
             self.split()
         else:
@@ -47,13 +47,13 @@ class Ball(CircleShape):
     def split(self):
         self.kill()
         for i in range(NEW_BALLS):
-            self.spawn_at_position()
+            self.spawn_center()
 
     def keep_bouncing(self):
         self.safty()
         #self.color = COLORS[random.randint(0,len(COLORS)-1)]
         direction_to_center = (CENTER - self.position).normalize()
-        newAngle = random.uniform(-25, 10)
+        newAngle = random.uniform(-25, 25)
         velo = direction_to_center.rotate(newAngle) * self.velocity.length()
         self.velocity = velo
         
@@ -65,7 +65,7 @@ class Ball(CircleShape):
 
     def spawn_at_position(self):
         direction_to_center = (CENTER - self.position).normalize()
-        newAngle = random.uniform(-25, 10)
+        newAngle = random.uniform(-25, 25)
         velo = direction_to_center.rotate(newAngle) * self.velocity.length()
         self.safty()#protects from sticking
         ball = Ball(self.position.x,self.position.y, radius=random.randint(8,20))
@@ -84,14 +84,15 @@ class Ball(CircleShape):
             self.position.y -= 2
 
     def spawn_center(self):
-        ball = Ball(CENTER[0], CENTER[1], radius=random.randint(3,12))
-        newAngle = random.uniform(-180, 180)
+        ball = Ball(CENTER[0], CENTER[1], radius=random.randint(3,20))
+        ball.timer = 0.5
+        newAngle = random.uniform(-120, 120)
         ball.velocity = - ball.velocity.rotate(newAngle)
 
     def pop_effect(self):
         pygame.init()
         pygame.mixer.init()
-        pygame.mixer.music.load('pop_edit.mp3')
+        pygame.mixer.music.load('sounds/pop_edit.mp3')
         pygame.mixer.music.set_volume(0.5)
         if pygame.mixer.music.get_busy():
             pygame.mixer.music.stop()
