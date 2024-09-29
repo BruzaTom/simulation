@@ -12,11 +12,18 @@ class Ball(CircleShape):
         self.music_timer = 0
         self.music_pos = 0
         self.gravity = GRAVITY
+        self.width = self.radius
+        self.timer = 0
 
     def draw(self, screen):
-        pygame.draw.circle(screen, self.color, self.position, self.radius, width=self.radius)
+        pygame.draw.circle(screen, self.color, self.position, self.radius, width=self.width)
 
     def update(self, dt):
+        if self.timer > 0:
+            self.width = 2
+            self.timer -= dt
+        else:
+            self.width = self.radius
         self.music_timer -= dt
         self.velocity.y += self.gravity
         self.position += self.velocity * dt
@@ -40,7 +47,7 @@ class Ball(CircleShape):
     def split(self):
         self.kill()
         for i in range(NEW_BALLS):
-            self.spawn_center()
+            self.spawn_at_position()
 
     def keep_bouncing(self):
         self.safty()
@@ -83,7 +90,7 @@ class Ball(CircleShape):
     def pop_effect(self):
         pygame.init()
         pygame.mixer.init()
-        pygame.mixer.music.load('pop.mp3')
+        pygame.mixer.music.load('pop_edit.mp3')
         pygame.mixer.music.set_volume(0.5)
         if pygame.mixer.music.get_busy():
             pygame.mixer.music.stop()

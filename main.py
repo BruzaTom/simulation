@@ -52,6 +52,7 @@ def main():
         for item in borderGroup:
             for ball in ballGroup:
                 if ball.collisions(item):
+                    ball.timer = dt * 15
                     music_timer = dt * 15
                     item.timer = dt * 5
                     item.effect()
