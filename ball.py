@@ -14,7 +14,7 @@ class Ball(CircleShape):
         self.gravity = GRAVITY
 
     def draw(self, screen):
-        pygame.draw.circle(screen, self.color, self.position, self.radius, width=10)
+        pygame.draw.circle(screen, self.color, self.position, self.radius, width=self.radius)
 
     def update(self, dt):
         self.music_timer -= dt
@@ -22,10 +22,11 @@ class Ball(CircleShape):
         self.position += self.velocity * dt
 
     def bounce(self, balls):
-        #self.pop_effect()
+        self.pop_effect()
         if MAX_BALLS > balls:
             self.split()
         else:
+            self.gravity = 1
             self.keep_bouncing()
 
     def collisions2(self, Ball):
@@ -39,13 +40,15 @@ class Ball(CircleShape):
     def split(self):
         self.kill()
         for i in range(NEW_BALLS):
-            self.spawn_at_position()
+            self.spawn_center()
 
     def keep_bouncing(self):
         self.safty()
         self.color = COLORS[random.randint(0,len(COLORS)-1)]
-        self.position -= self.velocity.normalize() * 1.005
-        self.velocity = -self.velocity
+        direction_to_center = (CENTER - self.position).normalize()
+        newAngle = random.uniform(-25, 10)
+        velo = direction_to_center.rotate(newAngle) * self.velocity.length()
+        self.velocity = velo
         
     def to_bottom(self):
         direction_to_bottom = ((CENTER[0], CENTER[1] + BORDER_RADIUS) - self.position).normalize()
@@ -54,7 +57,7 @@ class Ball(CircleShape):
         self.velocity = direction_to_bottom.rotate(newAngle) * self.velocity.length()
 
     def spawn_at_position(self):
-        direction_to_center = (CENTER - self.position).normalize() * 1.005
+        direction_to_center = (CENTER - self.position).normalize()
         newAngle = random.uniform(-25, 10)
         velo = direction_to_center.rotate(newAngle) * self.velocity.length()
         self.safty()#protects from sticking
@@ -73,7 +76,7 @@ class Ball(CircleShape):
             self.position.y -= 2
 
     def spawn_center(self):
-        ball = Ball(CENTER[0], CENTER[1])
+        ball = Ball(CENTER[0], CENTER[1], radius=random.randint(3,12))
         newAngle = random.uniform(-180, 180)
         ball.velocity = - ball.velocity.rotate(newAngle)
 
