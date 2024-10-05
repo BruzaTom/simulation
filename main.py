@@ -10,8 +10,8 @@ screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 # Initialize Pygame and the mixer
 pygame.init()
 pygame.mixer.init()
-pygame.mixer.music.load('sounds/brickbybrick.mp3')
-pygame.mixer.music.set_volume(0.5)
+pygame.mixer.music.load('sounds/meltyourheart.mp3')
+pygame.mixer.music.set_volume(.5)
 
 def main():
     pygame.init()
@@ -34,17 +34,17 @@ def main():
     ball = Ball(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
     
     i = 0
-    music_pos = 28.5
+    music_pos = 5
     music_timer = 0
     balls = 1
     while(True):
-
         if music_timer > 0:
             music_pos += dt
-            #print(music_pos-28.5)
+            #print(music_pos)
             music_timer -= dt
         else:
-            pygame.mixer.music.stop()
+            if balls < MAX_BALLS:
+                pygame.mixer.music.stop()
         screen.fill('Black')        
         for item in updatableGroup:
             item.update(dt)
@@ -55,8 +55,7 @@ def main():
                 if ball.collisions(item):
                     ball.timer = 0.5
                     music_timer = dt * 15
-                    item.timer = dt * 5
-                    item.effect()
+                    item.timer = 0.5
                     ball.bounce(balls)
                     balls += 1
                     if not pygame.mixer.music.get_busy():

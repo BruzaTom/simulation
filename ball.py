@@ -8,7 +8,7 @@ class Ball(CircleShape):
     def __init__(self, x, y, radius = BALL_RADIUS, containers = ()):
         super().__init__(x, y, radius)
         self.velocity = pygame.Vector2(0, 1) * BALL_SPEED
-        self.color = COLORS[random.randint(0,len(COLORS)-1)]
+        self.color = COLORS[2]
         self.music_timer = 0
         self.music_pos = 0
         self.gravity = GRAVITY
@@ -16,11 +16,14 @@ class Ball(CircleShape):
         self.timer = 0
 
     def draw(self, screen):
-        pygame.draw.circle(screen, self.color, self.position, self.radius, width=self.width)
+        if self.timer > 0:
+            pygame.draw.circle(screen, COLORS[5], self.position, self.radius, width=3)
+        else:
+            pygame.draw.circle(screen, self.color, self.position, self.radius, width=self.width)
 
     def update(self, dt):
         if self.timer > 0:
-            self.width = 2
+            self.width = 1
             self.timer -= dt
         else:
             self.width = self.radius
@@ -47,7 +50,7 @@ class Ball(CircleShape):
     def split(self):
         self.kill()
         for i in range(NEW_BALLS):
-            self.spawn_center()
+            self.spawn_at_position()
 
     def keep_bouncing(self):
         self.safty()
@@ -68,9 +71,9 @@ class Ball(CircleShape):
         newAngle = random.uniform(-25, 25)
         velo = direction_to_center.rotate(newAngle) * self.velocity.length()
         self.safty()#protects from sticking
-        ball = Ball(self.position.x,self.position.y, radius=random.randint(8,20))
+        ball = Ball(self.position.x,self.position.y, radius=BALL_RADIUS)
         ball.timer = 0.5
-        ball.color = COLORS[random.randint(0,len(COLORS)-1)]
+        #ball.color = COLORS[random.randint(0,len(COLORS)-1)]
         ball.velocity = velo
 
     def safty(self):
@@ -84,7 +87,7 @@ class Ball(CircleShape):
             self.position.y -= 2
 
     def spawn_center(self):
-        ball = Ball(CENTER[0], CENTER[1], radius=random.randint(3,20))
+        ball = Ball(CENTER[0], CENTER[1], radius=random.randint(3,15))
         ball.timer = 0.5
         newAngle = random.uniform(-120, 120)
         ball.velocity = - ball.velocity.rotate(newAngle)
